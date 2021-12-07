@@ -50,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   // Before a user is created, we are encrypting the password and using hash in its place
   User.addHook('beforeCreate', (pendingUser) => { // pendingUser is user object that gets passed to DB
     // Bcrypt is going to hash the password
+    // pending user - { name: 'John', email: 'john@email.com', password: 'donkeykong77' }
     let hash = bcrypt.hashSync(pendingUser.password, 12); // hash 12 times
     pendingUser.password = hash; // this will go to the DB
   });
